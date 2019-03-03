@@ -44,12 +44,10 @@ public class Shooter : MonoBehaviour
 
         foreach (EnemySpawner spawner in enemySpawners)
         {
-            Debug.Log((spawner.transform.position.y - transform.position.y));
             bool isCloseEnough = (Mathf.Abs(spawner.transform.position.y - transform.position.y) <= 0.2f);
             if(isCloseEnough)
             {
                 myLaneSpawner = spawner;
-                Debug.Log("FOUND THE SPAWNER!!!!!");
                 break;
             }
         }

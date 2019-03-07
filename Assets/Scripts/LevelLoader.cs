@@ -8,7 +8,6 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] float loadingTime = 3f;
     int currentSceneIndex;
 
-    // Start is called before the first frame update
     void Start()
     {
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -34,7 +33,7 @@ public class LevelLoader : MonoBehaviour
         Application.Quit();
     }
 
-    public void LoadStartScene(float loadDelay)
+    public void LoadLoseScreen(float loadDelay)
     {
         StartCoroutine(StartScreenLoadCoroutine(loadDelay));
     }
@@ -42,6 +41,6 @@ public class LevelLoader : MonoBehaviour
     IEnumerator StartScreenLoadCoroutine(float loadDelay)
     {
         yield return new WaitForSeconds(loadDelay);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Lose Screen");
     }
 }

@@ -24,16 +24,16 @@ public class LifeDisplay : MonoBehaviour
 
     public void ReduceLives(int amount)
     {
-        if (lives >= amount)
+        lives -= amount;
+        if (lives > 0)
         {
-            lives -= amount;
             UpdateDisplay();
         }
         else
         {
             lives = 0;
             UpdateDisplay();
-            levelLoader.LoadStartScene(loadDelay);
+            levelLoader.LoadLoseScreen(loadDelay);
         }
     }
 }

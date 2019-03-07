@@ -1,10 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] Attacker enemyPrefab;
+    [SerializeField] Attacker[] attackerPrefabs;
     [SerializeField] float minSpawnDelay = 1f;
     [SerializeField] float maxSpawnDelay = 5f;
 
@@ -20,14 +19,19 @@ public class EnemySpawner : MonoBehaviour
         while(spawn)
         {
             yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
-            SpawnEnemy();
+            SpawnAttacker();
         }
     }
 
-    private void SpawnEnemy()
+    private void SpawnAttacker()
     {
-        Attacker newAttacker = Instantiate(enemyPrefab, transform.position, transform.rotation) as Attacker;
-        newAttacker.transform.parent = transform;
+        int randomIndex = Random.Range(0, attackerPrefabs.Length);
+        Spawn(attackerPrefabs[randomIndex]);
     }
 
+    private void Spawn(Attacker attackerPrefab)
+    {
+        Attacker newAttacker = Instantiate(attackerPrefab, transform.position, transform.rotation) as Attacker;
+        newAttacker.transform.parent = transform;
+    }
 }

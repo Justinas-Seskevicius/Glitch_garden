@@ -19,13 +19,19 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadNextScene()
     {
-        StartCoroutine(NextSceneLoadCoroutine(loadingTime));
+        SceneManager.LoadScene(currentSceneIndex + 1);
     }
 
-    IEnumerator NextSceneLoadCoroutine(float loadDelay)
+    public void LoadStartScreen()
     {
-        yield return new WaitForSeconds(loadDelay);
-        SceneManager.LoadScene(currentSceneIndex + 1);
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Start Screen");
+    }
+
+    public void ReloadCurrentScene()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(currentSceneIndex);
     }
 
     public void QuitGame()
@@ -33,12 +39,12 @@ public class LevelLoader : MonoBehaviour
         Application.Quit();
     }
 
-    public void LoadLoseScreen(float loadDelay)
+    public void LoadLoseScreen()
     {
-        StartCoroutine(StartScreenLoadCoroutine(loadDelay));
+        StartCoroutine(LoseScreenCoroutine(loadingTime));
     }
 
-    IEnumerator StartScreenLoadCoroutine(float loadDelay)
+    IEnumerator LoseScreenCoroutine(float loadDelay)
     {
         yield return new WaitForSeconds(loadDelay);
         SceneManager.LoadScene("Lose Screen");
